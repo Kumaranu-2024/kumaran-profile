@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#6a1b9a">
+  <title>U. Kumaran – Assistant Professor, AI &amp; ML</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <style>
+/* ===== Palette & fonts (REC purple, same as the reference site) ===== */
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+
+  --rec: #6a1b9a; --rec-dark: #5a1582; --purple: #8e24aa;
+  --accent: #6a1b9a;           /* purple used for text/links */
+  --tint: #f3e8ff; --tint-2: #f8f1fd; --line-purple: #e3d6f2;
+  --bg: #ffffff; --surface: #ffffff;
+  --heading: #000000; --text: #000000; --muted: #000000; --soft: #000000; --border: #e2e8f0;
+  --grad: linear-gradient(90deg, #6a1b9a, #8e24aa);
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+}
+
+/* ===== Basics ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+:focus-visible { outline: 2px solid #8e24aa; outline-offset: 3px; border-radius: 6px; }
+::selection { background: var(--tint); color: var(--rec-dark); }
+.container { max-width: 80rem; margin: 0 auto; padding: 0 1.25rem; }
+@media (min-width: 1024px) { .container { padding: 0 2rem; } }
+.ic { width: 1.1em; height: 1.1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.skip { position: absolute; left: -999px; } .skip:focus { left: 12px; top: 12px; z-index: 70; background: var(--rec); color: #fff; padding: .5rem 1rem; border-radius: .5rem; }
+
+/* ===== Navbar ===== */
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px); transition: background .3s, box-shadow .3s; }
+.nav.scrolled, .nav.open { background: color-mix(in srgb, var(--surface) 90%, transparent); backdrop-filter: blur(8px); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.nav-inner { height: 4rem; display: flex; align-items: center; justify-content: space-between; }
+.brand { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+.nav-links { display: none; gap: 2rem; }
+.nav-links a { position: relative; padding: .5rem 0; font-size: .875rem; font-weight: 500; color: var(--muted); transition: color .2s; }
+.nav-links a::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 2px; background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-links a.active::after { transform: scaleX(1); }
+.menu-toggle { background: none; border: 0; color: var(--muted); padding: .5rem; cursor: pointer; border-radius: .5rem; }
+.menu-toggle .ic { width: 1.5rem; height: 1.5rem; }
+.mobile-menu { position: fixed; left: 0; right: 0; top: calc(4rem + env(safe-area-inset-top, 0px)); background: var(--surface); box-shadow: 0 10px 25px rgba(0,0,0,.12); padding: .75rem 1rem 1.5rem; transform: translateY(-1rem); opacity: 0; pointer-events: none; transition: all .3s; }
+.nav.open .mobile-menu { transform: none; opacity: 1; pointer-events: auto; }
+.mobile-menu a { display: block; padding: .75rem; border-radius: .375rem; font-weight: 500; }
+.mobile-menu a.active { background: var(--tint-2); color: var(--accent); }
+@media (min-width: 768px) { .nav-links { display: flex; } .menu-toggle, .mobile-menu { display: none; } }
+
+/* ===== Hero ===== */
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding-top: 4rem; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(64px); pointer-events: none; z-index: -1; }
+.blob.a { top: -8rem; left: -8rem; width: 24rem; height: 24rem; background: rgba(199,166,228,.4); }
+.blob.b { right: 0; bottom: 0; width: 28rem; height: 28rem; background: rgba(217,165,240,.35); }
+.hero-inner { max-width: 64rem; width: 100%; margin: 0 auto; padding: 4rem 1.25rem; display: grid; gap: 1.75rem; justify-items: start; }
+.hero-top { display: flex; flex-direction: column-reverse; align-items: flex-start; gap: 1.5rem; width: 100%; }
+@media (min-width: 640px) { .hero-top { flex-direction: row; align-items: center; justify-content: space-between; } }
+.hero-text { display: grid; gap: 1.25rem; }
+.badge { display: inline-flex; align-items: center; gap: .5rem; justify-self: start; background: var(--surface); border: 1px solid var(--tint); color: var(--accent); border-radius: 999px; padding: .375rem 1rem; font-size: .8rem; font-weight: 500; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 4.75rem); font-weight: 700; line-height: 1.05; letter-spacing: -.025em; color: var(--heading); }
+.role { display: flex; align-items: center; height: 2rem; font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 300; color: var(--muted); }
+.caret { display: inline-block; width: 3px; height: 1.5rem; margin-left: 4px; background: #8e24aa; animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.tagline { max-width: 36rem; font-size: 1.1rem; color: var(--muted); line-height: 1.7; }
+
+/* postage-stamp photo frame */
+.stamp-shadow { filter: drop-shadow(0 6px 14px rgba(106,27,154,.22)); transform: rotate(-3deg); transition: transform .3s; flex: none; }
+.stamp-shadow:hover { transform: rotate(0); }
+.stamp { --r: 5px; padding: calc(2 * var(--r)); background: #fff;
+  -webkit-mask: radial-gradient(var(--r), #0000 98%, #000) round calc(-1.5 * var(--r)) calc(-1.5 * var(--r)) / calc(3 * var(--r)) calc(3 * var(--r)), linear-gradient(#000 0 0) no-repeat 50% / calc(100% - 3 * var(--r)) calc(100% - 3 * var(--r));
+  mask: radial-gradient(var(--r), #0000 98%, #000) round calc(-1.5 * var(--r)) calc(-1.5 * var(--r)) / calc(3 * var(--r)) calc(3 * var(--r)), linear-gradient(#000 0 0) no-repeat 50% / calc(100% - 3 * var(--r)) calc(100% - 3 * var(--r)); }
+.stamp img { display: block; width: 7rem; aspect-ratio: 7/9; object-fit: cover; border: 1px solid var(--border); }
+@media (min-width: 640px) { .stamp img { width: 9rem; } }
+
+.chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+.chip { background: var(--surface); border: 1px solid var(--border); color: var(--muted); border-radius: 999px; padding: .375rem 1rem; font-size: .875rem; }
+.chip.purple { background: var(--tint-2); border-color: var(--tint); color: var(--accent); padding: .5rem 1rem; }
+.btns { display: flex; flex-wrap: wrap; gap: .75rem; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: .75rem; padding: .75rem 1.5rem; font-size: .9rem; font-weight: 500; transition: all .2s; }
+.btn.primary { background: var(--grad); color: #fff; box-shadow: 0 4px 10px rgba(106,27,154,.25); }
+.btn.primary:hover { transform: scale(1.03); box-shadow: 0 8px 18px rgba(106,27,154,.3); }
+.btn.outline { background: var(--surface); border: 1px solid var(--line-purple); color: var(--accent); }
+.btn.outline:hover { background: var(--tint-2); border-color: #b772d9; }
+
+/* reveal on scroll (only when JS is running) */
+.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+/* ===== Sections ===== */
+section.block { padding: 6rem 0; }
+section.block.white { background: var(--surface); }
+.sh { text-align: center; max-width: 40rem; margin: 0 auto 3.5rem; }
+.eyebrow { display: inline-block; background: var(--tint); color: var(--accent); border-radius: 999px; padding: .25rem .9rem; font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.sh h2 { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; color: var(--heading); line-height: 1.15; margin: .9rem 0 .8rem; }
+.sh .bar { width: 4rem; height: 4px; border-radius: 4px; background: var(--grad); margin: 0 auto 1rem; }
+.sh p { color: var(--muted); font-size: 1.05rem; }
+h3.sec { display: flex; align-items: center; gap: .5rem; font-size: 1.5rem; font-weight: 700; color: var(--heading); margin: 4rem 0 1.5rem; }
+h3.sec .ic { color: var(--accent); width: 1.5rem; height: 1.5rem; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: transform .2s, box-shadow .2s; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(106,27,154,.1); }
+.white .card, .white .chip:not(.purple) { background: var(--bg); }
+.grid { display: grid; gap: 1.5rem; }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+.g3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+.g4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+
+/* about */
+.intro { max-width: 48rem; margin: 0 auto; text-align: center; }
+.intro h3 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; color: var(--heading); }
+.intro p { margin-top: 1.25rem; font-size: 1.1rem; color: var(--muted); line-height: 1.75; }
+.intro .btns { justify-content: center; margin-top: 2rem; }
+.stat-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.stat-ic { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: var(--tint-2); border: 1px solid var(--tint); color: var(--accent); }
+.stat-ic .ic { width: 1.75rem; height: 1.75rem; }
+.stat-num { font-size: 2.25rem; font-weight: 700; color: var(--heading); }
+.stat-label { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); }
+.stat-note { font-size: .75rem; color: var(--soft); }
+.tl .when { font-size: .875rem; font-weight: 600; color: var(--accent); margin-bottom: .35rem; }
+.tl h4 { font-size: 1.1rem; font-weight: 600; color: var(--heading); line-height: 1.4; }
+.tl p:last-child { color: var(--muted); font-size: .95rem; }
+.stack { display: grid; gap: 1rem; }
+.note { color: var(--muted); max-width: 60rem; }
+
+/* research / certificates */
+.pub .venue { display: inline-block; background: var(--tint-2); color: var(--accent); border-radius: 999px; padding: .15rem .75rem; font-size: .75rem; font-weight: 600; margin-bottom: .75rem; }
+.pub h4 { font-size: 1rem; font-weight: 600; color: var(--heading); line-height: 1.5; }
+.cert .stat-ic { margin-bottom: 1rem; }
+.cert h4 { font-size: 1.05rem; font-weight: 600; color: var(--heading); }
+.cert p { color: var(--muted); font-size: .9rem; }
+
+/* collapsible lists */
+details.card { padding: 0; margin-bottom: 1rem; overflow: hidden; }
+details.card:hover { transform: none; }
+summary { cursor: pointer; padding: 1.25rem 1.5rem; font-size: 1.1rem; font-weight: 600; color: var(--heading); display: flex; justify-content: space-between; align-items: center; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-size: 1.5rem; color: var(--accent); line-height: 1; }
+details[open] summary::after { content: "–"; }
+details ul { padding: 0 1.5rem 1rem; }
+details li { padding: .7rem 0; border-top: 1px solid var(--border); font-size: .95rem; color: var(--heading); font-weight: 500; line-height: 1.5; }
+details li span { display: block; font-weight: 400; font-size: .85rem; color: var(--muted); }
+
+/* contact */
+.contact-card { text-align: center; }
+.contact-card .stat-ic { margin: 0 auto 1rem; }
+.contact-card h4 { font-weight: 600; color: var(--heading); }
+.contact-card p, .contact-card a:not(.btn) { color: var(--muted); }
+.contact-card a:not(.btn):hover { color: var(--accent); }
+.center { justify-content: center; margin-top: 2.5rem; }
+
+/* footer, back to top */
+footer { background: #26083a; color: #d9c4ea; text-align: center; padding: 2.5rem 1rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); font-size: .9rem; }
+footer strong { font-family: var(--font-display); font-size: 1.25rem; color: #fff; display: block; margin-bottom: .25rem; }
+.to-top { position: fixed; right: 1.25rem; bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)); width: 3rem; height: 3rem; border: 0; border-radius: 50%; background: var(--grad); color: #fff; display: grid; place-items: center; cursor: pointer; box-shadow: 0 6px 16px rgba(106,27,154,.35); opacity: 0; transform: translateY(1rem); pointer-events: none; transition: all .3s; z-index: 40; }
+.to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .caret { animation: none; }
+}
+</style>
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+<symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+<symbol id="i-brief" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+</defs></svg>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <nav class="container nav-inner" aria-label="Main">
+    <a class="brand" href="#home">U. Kumaran</a>
+    <ul class="nav-links"><li><a href="#home" data-id="home">Home</a></li><li><a href="#about" data-id="about">About</a></li><li><a href="#research" data-id="research">Research</a></li><li><a href="#certificates" data-id="certificates">Certificates</a></li><li><a href="#workshops" data-id="workshops">Workshops</a></li><li><a href="#contact" data-id="contact">Contact</a></li></ul>
+    <button class="menu-toggle" id="menuBtn" aria-label="Toggle menu" aria-expanded="false"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
+  </nav>
+  <div class="mobile-menu"><a href="#home" data-id="home">Home</a><a href="#about" data-id="about">About</a><a href="#research" data-id="research">Research</a><a href="#certificates" data-id="certificates">Certificates</a><a href="#workshops" data-id="workshops">Workshops</a><a href="#contact" data-id="contact">Contact</a></div>
+</header>
+
+<main id="main">
+  <!-- HOME -->
+  <section id="home" class="hero">
+    <div class="blob a" aria-hidden="true"></div><div class="blob b" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-top">
+        <div class="hero-text">
+          <span class="badge reveal">✦ Assistant Professor · AI &amp; ML</span>
+          <h1 class="reveal">Hi, I’m<br><span class="grad">U. Kumaran</span></h1>
+          <p class="role reveal" aria-live="polite"><span id="typed">Assistant Professor</span><span class="caret"></span></p>
+        </div>
+        <!-- Replace the src below with your own photo, e.g. src="me.jpg" -->
+        <figure class="stamp-shadow reveal"><div class="stamp"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23c5cad6'/%3E%3Ccircle cx='200' cy='190' r='85' fill='%23f0c9a8'/%3E%3Cpath d='M105 175c0-70 50-105 98-105s92 35 92 100c-20-35-60-50-95-50s-70 15-95 55z' fill='%23181818'/%3E%3Cpath d='M40 500c0-90 60-150 160-150s160 60 160 150z' fill='%231c1b4b'/%3E%3C/svg%3E" alt="U. Kumaran" width="413" height="444"></div></figure>
+      </div>
+      <p class="tagline reveal">Assistant Professor in the Department of Artificial Intelligence and Machine Learning at Rajalakshmi Engineering College, Chennai.</p>
+      <div class="chips reveal"><span class="chip">Artificial Intelligence</span><span class="chip">Machine Learning</span><span class="chip">Deep Learning</span><span class="chip">Medical Imaging</span><span class="chip">Cloud Computing</span></div>
+      <div class="btns reveal">
+        <a class="btn primary" href="#research"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg> Publications</a>
+        <a class="btn outline" href="#contact"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg> Contact</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="block"><div class="container">
+    <div class="sh reveal"><span class="eyebrow">About</span><h2>About Me</h2><div class="bar"></div><p>Teaching, research and mentoring in computer science</p></div>
+    <div class="intro reveal">
+      <h3><span class="grad">Hello, I’m</span> U. Kumaran</h3>
+      <p>Accomplished, skilled and talented educator with diverse knowledge in Computer Science and Engineering. Currently an Assistant Professor in the Department of Artificial Intelligence and Machine Learning at Rajalakshmi Engineering College, Chennai, seeking research and teaching roles where my skills and knowledge are put to full use.</p>
+      <div class="btns"><a class="btn primary" href="#contact"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg> Get in touch</a><a class="btn outline" href="#research"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg> View publications</a></div>
+    </div>
+    <div class="grid g4" style="margin-top:4rem"><div class="card reveal"><div class="stat-top"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg></span><span class="stat-num">15</span></div><p class="stat-label">Publications</p><p class="stat-note">Research papers published</p></div>
+<div class="card reveal"><div class="stat-top"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span><span class="stat-num">9</span></div><p class="stat-label">Certificates</p><p class="stat-note">Professional certifications</p></div>
+<div class="card reveal"><div class="stat-top"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></span><span class="stat-num">30</span></div><p class="stat-label">Workshops &amp; FDPs</p><p class="stat-note">Seminars and conferences attended</p></div>
+<div class="card reveal"><div class="stat-top"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg></span><span class="stat-num">4</span></div><p class="stat-label">Institutions</p><p class="stat-note">Where I have taught</p></div></div>
+
+    <div class="grid g2" style="margin-top:1rem">
+      <div><h3 class="sec"><svg class="ic" aria-hidden="true"><use href="#i-cap"/></svg> Education</h3><div class="stack"><div class="card tl reveal"><p class="when">2014</p><h4>M.E. Computer Science and Engineering</h4><p>Archana Institute of Technology, Krishnagiri · Anna University</p></div>
+<div class="card tl reveal"><p class="when">2008</p><h4>B.Tech Information Technology</h4><p>C. Abdul Hakeem Engineering and Technology, Vellore · Anna University</p></div>
+<div class="card tl reveal"><p class="when">2005</p><h4>D.C.S.E. Computer Science and Engineering</h4><p>Swamy Abedhanantha Polytechnic College, Thellar · DOTE</p></div></div></div>
+      <div><h3 class="sec"><svg class="ic" aria-hidden="true"><use href="#i-brief"/></svg> Experience</h3><div class="stack"><div class="card tl reveal"><p class="when">Nov 2023 – Present</p><h4>Assistant Professor, Artificial Intelligence and Machine Learning</h4><p>Rajalakshmi Engineering College, Chennai</p></div>
+<div class="card tl reveal"><p class="when">Feb 2019 – Oct 2023</p><h4>Associate Professor &amp; Head, Computer Science and Engineering</h4><p>Mother Theresa Institute of Engineering &amp; Technology, Palamaner</p></div>
+<div class="card tl reveal"><p class="when">Sep 2014 – Feb 2019</p><h4>Assistant Professor, Computer Science and Engineering</h4><p>Adhiparasakthi Agricultural and Horticultural College, Vellore</p></div>
+<div class="card tl reveal"><p class="when">Jun 2009 – Apr 2012</p><h4>Lecturer, Computer Science and Engineering</h4><p>Archana Institute of Engineering and Technology, Krishnagiri</p></div></div></div>
+    </div>
+
+    <h3 class="sec">Subjects handled</h3><p class="note reveal">C Programming, DBMS, Artificial Intelligence, Cloud Computing, Computer Networks, Mobile Computing, Internet Programming, Information Retrieval, Business Intelligence &amp; Analytics, Computer Vision &amp; Its Applications and Web Programming, along with the laboratory classes for these subjects.</p>
+    <h3 class="sec">Strengths</h3><div class="chips reveal"><span class="chip">Effective teaching using a variety of methodologies</span><span class="chip">Good time management and organizational skills</span><span class="chip">Proven track record of guiding and motivating students</span><span class="chip">Works with minimal supervision and a positive attitude</span></div>
+    <h3 class="sec">Skills</h3><div class="chips reveal"><span class="chip">C</span><span class="chip">C++</span><span class="chip">Java</span><span class="chip">Python</span><span class="chip">Windows / Linux</span><span class="chip">SQL Server</span><span class="chip">MongoDB</span><span class="chip">MS Office</span></div>
+    <h3 class="sec">Academic roles</h3><div class="chips reveal"><span class="chip">Deputy Exam Cell Coordinator</span><span class="chip">Program Officer, NSS</span><span class="chip">NAAC Coordinator</span><span class="chip">College logo designer</span><span class="chip">Website updating</span><span class="chip">Bulk SMS service</span></div>
+  </div></section>
+
+  <!-- RESEARCH -->
+  <section id="research" class="block white"><div class="container">
+    <div class="sh reveal"><span class="eyebrow">Research</span><h2>Research &amp; Publications</h2><div class="bar"></div><p>Papers in journals and conferences</p></div>
+    <div class="chips reveal" style="justify-content:center;margin-bottom:3rem"><span class="chip purple">Medical Imaging</span><span class="chip purple">Deep Learning</span><span class="chip purple">Wireless Networks</span><span class="chip purple">Cloud Computing</span><span class="chip purple">Agriculture Analytics</span></div>
+    <div class="grid g2"><article class="card pub reveal"><span class="venue">ICDSAAI</span><h4>Exposure on Edge Detection and Image Segmentation with Instinctive Classification of Brain Tumor Using Artificial Intelligence Methods</h4></article>
+<article class="card pub reveal"><span class="venue">ICACTA</span><h4>DCNET: A Novel Implementation of Gastric Cancer Detection System through Deep Learning Convolution Networks</h4></article>
+<article class="card pub reveal"><span class="venue">IJAEAST</span><h4>Systematic Analysis of Kidney Volume Estimation Through Cyclic Bayesian Neural Network</h4></article>
+<article class="card pub reveal"><span class="venue">ICEEICT</span><h4>Deep Learning for Classification of Salient Object Classification in Unmanned Crime Spot</h4></article>
+<article class="card pub reveal"><span class="venue">International Journal of Advances in Engineering Architecture Science and Technology</span><h4>Normalized Ensemble Approach on Rainfall Prediction</h4></article>
+<article class="card pub reveal"><span class="venue">ICEEICT</span><h4>Design and Implementation of Lung Abnormality Detection Through Sparse Projection Features Enabled Distributed Convolution Network</h4></article>
+<article class="card pub reveal"><span class="venue">International Journal of Advances in Engineering Architecture Science and Technology</span><h4>Analysis of Impacted External Blockages Affection the 5G Communication</h4></article>
+<article class="card pub reveal"><span class="venue">International Journal of Advances in Engineering Architecture Science and Technology</span><h4>DL Net Deep Luminance-Network for Deep-Sea Object Classification</h4></article>
+<article class="card pub reveal"><span class="venue">ICEEICT</span><h4>Pulmonary Chest Nodule Detection through Adaptive Reinforcement Learning Model (ARLM)</h4></article>
+<article class="card pub reveal"><span class="venue">Journal of Advanced Research in Dynamical and Control Systems</span><h4>Enhanced Routing for Secured AD-HOC Network</h4></article>
+<article class="card pub reveal"><span class="venue">IJRTE</span><h4>Channel Assignment Performance in Wireless Mesh Networks through Interference Mitigation Functions</h4></article>
+<article class="card pub reveal"><span class="venue">Test Engineering &amp; Management</span><h4>Detecting Clickbaits Automatically for Analyzing Social Media Text</h4></article>
+<article class="card pub reveal"><span class="venue">IJITEE</span><h4>Ambulance Calling System Using Heart Rate Sensor in SmartBand</h4></article>
+<article class="card pub reveal"><span class="venue">Journal of Pharmacognosy and Phytochemistry (Impact Factor 5.1)</span><h4>Consumer Behavior and Purchase Intension for Organic Fruit and Vegetables in Vellore District</h4></article>
+<article class="card pub reveal"><span class="venue">Journal of Pharmacognosy and Phytochemistry (Impact Factor 5.21)</span><h4>Price Spread, Marketing Efficiency and Constraints in Value Chain of Tapioca in Tamil Nadu</h4></article></div>
+  </div></section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates" class="block"><div class="container">
+    <div class="sh reveal"><span class="eyebrow">Certifications</span><h2>Professional Certifications</h2><div class="bar"></div><p>Courses completed in AI, cloud, databases and teaching</p></div>
+    <div class="grid g3"><div class="card cert reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span><h4>Cloud Computing</h4><p>NPTEL · Jul–Oct 2023</p></div>
+<div class="card cert reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span><h4>Introduction to Artificial Intelligence (AI)</h4><p>Coursera · IBM</p></div>
+<div class="card cert reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span><h4>Agile with Atlassian Jira</h4><p>Coursera · Atlassian University</p></div>
+<div class="card cert reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span><h4>Designing Learning Innovation</h4><p>Coursera · Politecnico di Milano 1863</p></div>
+<div class="card cert reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span><h4>English for Teaching Purposes</h4><p>Coursera · UAB</p></div>
+<div class="card cert reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span><h4>Introduction to Python Fundamentals</h4><p>Coursera · University of Colorado Boulder</p></div>
+<div class="card cert reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span><h4>Introduction to Generative AI</h4><p>Coursera · Google Cloud</p></div>
+<div class="card cert reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span><h4>Python Classes and Inheritance</h4><p>Coursera · University of Michigan</p></div>
+<div class="card cert reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span><h4>SQL: A Practical Introduction for Querying Databases</h4><p>Coursera · IBM</p></div></div>
+  </div></section>
+
+  <!-- WORKSHOPS -->
+  <section id="workshops" class="block white"><div class="container">
+    <div class="sh reveal"><span class="eyebrow">Learning</span><h2>Workshops &amp; Memberships</h2><div class="bar"></div><p>Seminars, FDPs, conferences and professional bodies</p></div>
+    <div style="max-width:52rem;margin:0 auto"><details class="card reveal" open><summary>Seminars, workshops &amp; FDPs attended</summary><ul class="plain">
+<li>Cutting Edge Technologies in Computer Science (FDP) <span>Easwari Engineering College · 23–29 Sep 2024</span></li>
+<li>Internet of Things for Emerging Technical Applications (FDP) <span>M.P.N. Engineering College · 12–17 Aug 2024</span></li>
+<li>Design Thinking and Innovations (FDP) <span>Sathyabama Institute of Science and Engineering · 6–10 May 2024</span></li>
+<li>The Art of Research and Development (FDP) <span>IEEE, S.A. Engineering College · 26–30 Dec 2023</span></li>
+<li>Modern Medical Instrumentation (FDP) <span>SRM · 4–8 Dec 2023</span></li>
+<li>Cloud Computing (FDP) <span>NPTEL-AICTE · Jul–Oct 2023</span></li>
+<li>Recent Trends in Signal and Image Processing (FDP) <span>MTIET, AP · 28 Aug – 1 Sep 2023</span></li>
+<li>Recent Trends and Research Challenges in Computer Science and Engineering (FDP) <span>AICTE, SITAMS Andhra Pradesh · 7–20 Jun 2019</span></li>
+<li>Biotechnology Research and Development in Biosurfactants (International seminar) <span>SIMTS Chennai</span></li>
+<li>Recent Trends in Plant Growth Regulators and Nutrient Management (National seminar) <span>Adhiparasakthi Agricultural College, Kalavai · 16 Apr 2014</span></li>
+<li>Improved Technologies for Sustainable Sugarcane Production (National seminar) <span>Adhiparasakthi Agricultural College, Kalavai · 21 Aug 2014</span></li>
+<li>Supply Chain Management – Challenges and Prospects (National seminar) <span>Adhiparasakthi Agricultural College, Kalavai · 28 Jan 2015</span></li>
+<li>Recent Technologies for Higher Production of Horticultural Crops (National seminar) <span>Adhiparasakthi Horticultural College, Kalavai · 1 Oct 2015</span></li>
+<li>Fruit and Vegetable Processing Technologies (Entrepreneurship awareness camp) <span>Adhiparasakthi Agricultural College, Kalavai · 8 &amp; 10 Nov 2016</span></li>
+<li>Value Addition of Millets (Entrepreneurship awareness camp) <span>Adhiparasakthi Horticultural College, Kalavai · 6–8 Sep 2017</span></li>
+<li>Innovative Breeding Approaches in Crop Sciences (Seminar) <span>Adhiparasakthi Horticultural College, Kalavai · 27 Jul 2018</span></li>
+</ul></details>
+<details class="card reveal"><summary>Conferences &amp; workshops</summary><ul class="plain">
+<li>Hybrid Cat Boost Model for Financial Stock Growth Analysis <span>ICAET 2023 · 13 Apr 2023</span></li>
+<li>Deep Reinforced Learning Algorithm for Chronic Kidney Abnormality Prediction <span>ICAET 2023 · 12 Apr 2023</span></li>
+<li>Deep Learning for Classification of Salient Object Classification in Unmanned Crime Spot <span>ICEEICT 2023 · Apr 2023</span></li>
+<li>International Conference on Advances in Engineering and Technology <span>K.R. Pet Krishna Government Engineering College, Karnataka · 13 Apr 2023</span></li>
+<li>Workshop on SPSS in Research <span>Star International Foundation and Research · 26–30 Dec 2023</span></li>
+<li>Advanced Research Methodology (two-week national workshop) <span>SRM · 3–18 Jul 2023</span></li>
+<li>Importance of Assistive Technologies in Higher Education for Differently Abled Learners <span>VIT</span></li>
+<li>2nd National Conference on Industrial Internet of Things and Emerging Technologies <span>Saveetha University, Chennai · 5 Apr 2016</span></li>
+<li>11th International Tamil Internet Conference <span>Annamalai University, Chidambaram · 28–30 Dec 2017</span></li>
+<li>Workshop on National e-Governance Plan <span>MIT Campus, Anna University · 19 Dec 2016</span></li>
+<li>International Workshop on Recent Developments in Neural Networks <span>MIT Campus, Anna University · 3–5 Oct 2012</span></li>
+<li>Workshop on Cloud Computing <span>MIT Campus, Anna University · 12–14 Sep 2017</span></li>
+<li>Workshop on Tamil Computing and Open Source (TACOLA) <span>Anna University, Chennai · 7–8 Sep 2012</span></li>
+<li>Workshop on Pervasive Web Services <span>Anna University, Chennai · 27–28 Feb 2012</span></li>
+</ul></details>
+<details class="card reveal"><summary>Professional body memberships</summary><ul class="plain">
+<li>International Association of Engineers <span>No. 234160</span></li>
+<li>The Society of Digital Information and Wireless Communication <span>No. 23881</span></li>
+<li>International Computer Science and Engineering Society <span>No. 3730</span></li>
+</ul></details></div>
+  </div></section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="block"><div class="container">
+    <div class="sh reveal"><span class="eyebrow">Contact</span><h2>Get In Touch</h2><div class="bar"></div><p>Reach out about research, teaching or collaboration</p></div>
+    <div class="grid g3">
+      <div class="card contact-card reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg></span><h4>Phone</h4><a href="tel:+918667258490">8667258490</a></div>
+      <div class="card contact-card reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></span><h4>Location</h4><p>Vellore, Tamil Nadu – 632009</p></div>
+      <div class="card contact-card reveal"><span class="stat-ic"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg></span><h4>Currently at</h4><p>Rajalakshmi Engineering College, Chennai</p></div>
+    </div>
+    <div class="btns center"><a class="btn primary" href="tel:+918667258490"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg> Call me</a></div>
+  </div></section>
+</main>
+
+<footer><strong>U. Kumaran</strong>Assistant Professor · AI &amp; ML<br>© 2026 U. Kumaran</footer>
+<button class="to-top" id="toTop" aria-label="Back to top"><svg class="ic" aria-hidden="true"><use href="#i-up"/></svg></button>
+
+<script>
+(function () {
+  var nav = document.getElementById('nav'), btn = document.getElementById('menuBtn'), top = document.getElementById('toTop');
+  function onScroll() { nav.classList.toggle('scrolled', scrollY > 20); top.classList.toggle('show', scrollY > 600); }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  btn.addEventListener('click', function () { var o = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
+  top.addEventListener('click', function () { scrollTo({ top: 0 }); });
+
+  var links = document.querySelectorAll('[data-id]');
+  links.forEach(function (a) { a.addEventListener('click', function () { nav.classList.remove('open'); btn.setAttribute('aria-expanded', false); }); });
+  var secs = ['home','about','research','certificates','workshops','contact'].map(function (i) { return document.getElementById(i); });
+  var spy = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('active', a.dataset.id === e.target.id); }); }); }, { rootMargin: '-45% 0px -50% 0px' });
+  secs.forEach(function (s) { spy.observe(s); });
+
+  var rv = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-visible'); rv.unobserve(e.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function (el) { rv.observe(el); });
+
+  // typewriter
+  var roles = ['Assistant Professor', 'AI & ML Educator', 'Researcher'], el = document.getElementById('typed');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var r = 0, c = roles[0].length, del = true;
+    var tick = function () {
+      if (del) { c--; if (c <= 0) { del = false; r = (r + 1) % roles.length; c = 0; } }
+      else { c++; if (c >= roles[r].length) { del = true; el.textContent = roles[r]; return setTimeout(tick, 1800); } }
+      el.textContent = roles[r].slice(0, c) || '\u00a0';
+      setTimeout(tick, del ? 40 : 80);
+    };
+    setTimeout(tick, 1800);
+  }
+})();
+</script>
+</body>
+</html>
